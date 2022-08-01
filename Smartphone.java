@@ -2,35 +2,50 @@ package myjavasmartphone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Smartphone {
+    // Eigenschaften / Atribute
     private List<Kontakt> meineKontakte;
+    Set<Kontakt> a = new TreeSet();
 
+    // Konstruktor
     public Smartphone() {
         meineKontakte = new ArrayList<Kontakt>();
     }
 
-    public boolean findKontakt (Kontakt name){
-
-        for( Kontakt  KontaktInListe : meineKontakte){
-
-            if (name.getName().equals(KontaktInListe.getName()));
-            System.out.printf("Kontakt ist bereit da ");
-            return  false;
+    // Methoden
+    public boolean addKontakt(Kontakt neuerKontakt) {
+        for (Kontakt kontaktInListe : meineKontakte) {
+            if (neuerKontakt.getName().equals(kontaktInListe.getName())) {
+                System.out.println("Kotankt bereits vorhanden");
+                return false;
+            }
         }
-        return  true;
+        meineKontakte.add(neuerKontakt);
+        System.out.println("Kontakt wurde hinzugefügt!");
+        return true;
 
     }
 
-    public  boolean addKontakt (Kontakt neuerKontakt){
-        if (findKontakt(neuerKontakt)== true){
-            meineKontakte.add(neuerKontakt);
+    public boolean findKontakt(String name) {
+        for (Kontakt kontaktInListe : meineKontakte) {
+            if (name.equals(kontaktInListe.getName())) {
+                System.out.println("Gefunden.. " + "Name: " + kontaktInListe.getName() + " Tel: "
+                        + kontaktInListe.getTelefonNummer());
+                return true;
+            }
         }
-        else
-        {
-            System.out.println("kontakt kann nicht hinzugefuegt");
-            return false;
+        System.out.println("Nicht gefunden");
+        return false;
+
+    }
+
+    public void ausgabe() {
+        for (Kontakt kontaktInListe : meineKontakte) {
+            System.out.println("Name: " + kontaktInListe.getName() + " Tel: " + kontaktInListe.getTelefonNummer());
         }
-        return true;
+
     }
 }
